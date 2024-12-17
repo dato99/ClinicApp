@@ -11,7 +11,7 @@ namespace ClinicApp.Auth
     {
         Token GenerateToken(string email);
         Token GetToken(User user);
-        Token GetToken(Doctor doctor);
+        //Token GetToken(Doctor doctor);
         //Token GetToken(loginRequest loginRequest);
     }
 
@@ -21,34 +21,38 @@ namespace ClinicApp.Auth
 
         public JwtManager(IConfiguration configuration)
         {
-            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            this._configuration = configuration;
         }
 
+        
         public Token GetToken(User user)
         {
             return GenerateToken(new Claim[]
             {
             new Claim("ID", user.Id.ToString(), ClaimValueTypes.Integer),
-            new Claim("First_Name", user.FirstName, ClaimValueTypes.String),
-            new Claim("Last_Name", user.LastName, ClaimValueTypes.String),
+            //new Claim("First_Name", user.FirstName, ClaimValueTypes.String),
+            //new Claim("Last_Name", user.LastName, ClaimValueTypes.String),
             new Claim("Email", user.Email, ClaimValueTypes.String),
-            new Claim("Personal_Number", user.PersonalNumber, ClaimValueTypes.String),
-            new Claim("Role", "User")
+            //new Claim("Personal_Number", user.PersonalNumber, ClaimValueTypes.String),
+            //new Claim("passwordhash", user.Password, ClaimValueTypes.String),
+            
+          
             });
+           
         }
 
-        public Token GetToken(Doctor doctor)
-        {
-            return GenerateToken(new Claim[]
-            {
-            new Claim("ID", doctor.ID.ToString(), ClaimValueTypes.Integer),
-            new Claim("First_Name", doctor.FirstName, ClaimValueTypes.String),
-            new Claim("Last_Name", doctor.LastName, ClaimValueTypes.String),
-            new Claim("Email", doctor.Email, ClaimValueTypes.String),
-            new Claim("Category", doctor.Category, ClaimValueTypes.String),
-            new Claim("Role", "Doctor")
-            });
-        }
+        //public Token GetToken(Doctor doctor)
+        //{
+        //    return GenerateToken(new Claim[]
+        //    {
+        //    new Claim("ID", doctor.ID.ToString(), ClaimValueTypes.Integer),
+        //    new Claim("First_Name", doctor.FirstName, ClaimValueTypes.String),
+        //    new Claim("Last_Name", doctor.LastName, ClaimValueTypes.String),
+        //    new Claim("Email", doctor.Email, ClaimValueTypes.String),
+        //    new Claim("Category", doctor.Category, ClaimValueTypes.String),
+        //    new Claim("Role", "Doctor")
+        //    });
+        //}
 
         //public Token GetToken(loginRequest loginRequest)
         //{
@@ -64,7 +68,7 @@ namespace ClinicApp.Auth
             return GenerateToken(new Claim[]
             {
             new Claim(ClaimTypes.Email, email, ClaimValueTypes.String),
-            new Claim("Role", "User") // Assuming this is for users
+            new Claim("Role", "User") 
             });
         }
         private Token GenerateToken(Claim[] claims)

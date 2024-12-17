@@ -15,13 +15,9 @@ var builder = WebApplication.CreateBuilder(args);
 //    config.Filters.Add(new UnhandledExceptionFilter());
 //});
 
-// Add services to the container.
 
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
-});
-builder.Services.AddAuthentication(/* your authentication setup */);
+
+
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 var connectionString = builder.Configuration.GetConnectionString("OrclConnStr");
@@ -68,6 +64,11 @@ builder.Services.AddSwaggerGen(option =>
         Scheme = "Bearer"
     });
 });
+builder.Services.AddScoped<GlobalExceptionFilter>();
+builder.Services.AddControllers(config =>
+{
+    config.Filters.AddService(typeof(GlobalExceptionFilter));
+});
 
 builder.Services.AddAuthentication(x =>
 {
@@ -86,11 +87,17 @@ builder.Services.AddAuthentication(x =>
         IssuerSigningKey = new SymmetricSecurityKey(key)
     };
 });
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
+});
+builder.Services.AddAuthentication(/* your authentication setup */);
 
 builder.Services.AddScoped<IPKG_USERS_D, PKG_USERS_D>();
 builder.Services.AddScoped<IPKG_DOCTORS_D, PKG_DOCTORS_D>();
+builder.Services.AddScoped<IPKG_DOCTORS_D, PKG_DOCTORS_D>();
 //builder.Services.AddScoped<UserRepository>(); // Register UserRepository
-builder.Services.AddScoped<GlobalExceptionFilter>();
+
 builder.Services.AddScoped<IPKG_LOGS, PKG_LOGS>();
 
 

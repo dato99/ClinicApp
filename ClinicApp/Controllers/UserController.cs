@@ -31,7 +31,7 @@ namespace ClinicApp.Controllers
             this.jwtManager = jwtManager;
             this.logs = logs;
         }
-        [Authorize]
+
         [HttpGet]
         public IActionResult GetUsers()
         {
@@ -48,7 +48,7 @@ namespace ClinicApp.Controllers
             }
             return Ok(users);
         }
-        [Authorize]
+
         [HttpPost]
         public IActionResult AddUser(User user)
         {
@@ -82,7 +82,7 @@ namespace ClinicApp.Controllers
 
                 return Ok("User added successfully!");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 logs.add_log(ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, "System error. Try again.");
@@ -110,11 +110,6 @@ namespace ClinicApp.Controllers
                     return BadRequest("Personal number is required.");
                 if (string.IsNullOrEmpty(user.Password))
                     return BadRequest("Password is required.");
-
-                if (string.IsNullOrEmpty(user.Role) || !new[] { "User", "Doctor", "Admin" }.Contains(user.Role))
-                {
-                    return BadRequest("Invalid role. Role should be 'User', 'Doctor', or 'Admin'.");
-                }
 
                 // Call the data layer to update the user
                 package.update_user(user); // Assuming 'package' is your data layer class
@@ -149,20 +144,20 @@ namespace ClinicApp.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        [HttpPost("Login")]
         public IActionResult Authenticate(LoginRequest loginData)
         {
             Token? token = null;
-            User? user  = null;
-            
-           
-                 user = package.authenticate(loginData);
-                if (user == null) return Unauthorized("Usrname or password is incorrect");
-              
-                token = jwtManager.GetToken(user);
-            
-         
+            User? user = null;
+
+            user = package.authenticate(loginData);
+            if (user == null) return Unauthorized("Usrname or password is incorrect");
+
+
+            token = jwtManager.GetToken(user);
+
             return Ok(token);
+
 
         }
 

@@ -42,8 +42,8 @@ namespace ClinicApp.Controllers
                 if (string.IsNullOrEmpty(doctor.Email)) return BadRequest("Email is required!");
                 if (string.IsNullOrEmpty(doctor.PersonalNumber)) return BadRequest("Personal ID is required!");
                 if (string.IsNullOrEmpty(doctor.Password)) return BadRequest("Password is required!");
-                if (string.IsNullOrEmpty(doctor.Category)) return BadRequest("Category is required!");
-                doctor.CreatedAt = DateTime.Now;
+                //if (string.IsNullOrEmpty(doctor.CategoryId)) return BadRequest("Category is required!");
+                //doctor.CreatedAt = DateTime.Now;
 
                 package.add_doctor(doctor);
 
@@ -77,8 +77,8 @@ namespace ClinicApp.Controllers
                     return BadRequest("Personal number is required.");
                 if (string.IsNullOrEmpty(doctor.Password))
                     return BadRequest("Password is required.");
-                if (string.IsNullOrEmpty(doctor.Category))
-                    return BadRequest("Password is required.");
+                //if (string.IsNullOrEmpty(doctor.Category))
+                //    return BadRequest("Password is required.");
 
                 // Call the data layer to update the user
                 package.update_doctor(doctor); // Assuming 'package' is your data layer class

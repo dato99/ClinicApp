@@ -17,8 +17,8 @@ namespace ClinicApp.Filter
         public override void OnException(ExceptionContext context)
         {
             var result = new ObjectResult("System Error Try Again")
-            { 
-                StatusCode = (int)HttpStatusCode.InternalServerError 
+            {
+                StatusCode = (int)HttpStatusCode.InternalServerError
             };
             var error = context.Exception.Message;
 
@@ -28,7 +28,7 @@ namespace ClinicApp.Filter
             }
             catch
             {
-
+                
             }
             context.Result = result;
         }

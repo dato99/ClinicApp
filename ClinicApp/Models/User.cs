@@ -20,7 +20,7 @@ namespace ClinicApp.Models
        
         public string Password { get; set; }
 
-        public string Role { get; set; } // "User" or "Doctor"
+        public string Role { get; set; } 
     }
 
 }
