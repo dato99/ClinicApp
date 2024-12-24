@@ -89,7 +89,7 @@ namespace ClinicApp.Packages
                 doctor.LastName = reader["LASTNAME"].ToString();
                 doctor.Email = reader["EMAIL"].ToString();
                 //doctor.PersonalNumber = reader["PERSONAL_NUMBER"].ToString();
-                doctor.CategoryName = reader["name"].ToString();
+                //doctor.CategoryName = reader["name"].ToString();
                 doctor.DoctorReview = reader["doctor_review"].ToString();
 
                 //doctor.Password = reader["PASSWORD"].ToString();

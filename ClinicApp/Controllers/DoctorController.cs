@@ -81,7 +81,6 @@ namespace ClinicApp.Controllers
                 //    return BadRequest("Password is required.");
 
                 // Call the data layer to update the user
-                package.update_doctor(doctor); // Assuming 'package' is your data layer class
 
                 return Ok("User updated successfully.");
             }
