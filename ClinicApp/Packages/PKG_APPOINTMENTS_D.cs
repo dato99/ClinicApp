@@ -9,7 +9,7 @@ namespace ClinicApp.Packages
     {
         //public List<Doctor> get_appointments();
         public void add_appointment(Appointment appointment);
-        //public void delete_appointment(Appointment appointment);
+        public void delete_appointment(Appointment appointment);
         //public void update_appoitment(Appointment appointmnet);
     }
     public class PKG_APPOINTMENTS_D : PKG_BASE, IPKG_APPOINTMENTS_D
@@ -35,11 +35,25 @@ namespace ClinicApp.Packages
             cmd.Parameters.Add("p_description", OracleDbType.Varchar2).Value = appointment.Problem;
             
 
-
-
-
             cmd.ExecuteNonQuery();
 
+            conn.Close();
+
+        }
+        public void delete_appointment(Appointment appointment)
+        {
+            OracleConnection conn = new OracleConnection();
+            conn.ConnectionString = ConnStr;
+            conn.Open();
+
+            OracleCommand cmd = new OracleCommand();
+            cmd.Connection = conn;
+            cmd.CommandText = "olerning.PKG_dsh_booking.delete_booking";
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("p_id", OracleDbType.Int32).Value = appointment.Id;
+
+            cmd.ExecuteNonQuery();
             conn.Close();
 
         }

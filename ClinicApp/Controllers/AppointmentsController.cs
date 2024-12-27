@@ -37,5 +37,20 @@ namespace ClinicApp.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"System error: {ex.Message}");
             }
         }
+
+
+        [HttpDelete]
+        public IActionResult DeleteAppointment(Appointment appointment)
+        {
+            try
+            {
+                package.delete_appointment(appointment);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "System error. Try again.");
+            }
+            return Ok();
+        }
     }
 }
