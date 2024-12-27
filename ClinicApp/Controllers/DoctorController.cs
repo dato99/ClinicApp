@@ -42,8 +42,8 @@ namespace ClinicApp.Controllers
                 if (string.IsNullOrEmpty(doctor.Email)) return BadRequest("Email is required!");
                 if (string.IsNullOrEmpty(doctor.PersonalNumber)) return BadRequest("Personal ID is required!");
                 if (string.IsNullOrEmpty(doctor.Password)) return BadRequest("Password is required!");
-                //if (string.IsNullOrEmpty(doctor.CategoryId)) return BadRequest("Category is required!");
-                //doctor.CreatedAt = DateTime.Now;
+
+                doctor.CreatedAt = DateTime.Now;
 
                 package.add_doctor(doctor);
 
@@ -58,7 +58,7 @@ namespace ClinicApp.Controllers
      
 
         [HttpPut("{id}")]
-        public IActionResult UpdateDoctor(int id, [FromBody] Doctor doctor)
+        public IActionResult UpdateDoctor(int id, Doctor doctor)
         {
             try
             {
@@ -77,22 +77,19 @@ namespace ClinicApp.Controllers
                     return BadRequest("Personal number is required.");
                 if (string.IsNullOrEmpty(doctor.Password))
                     return BadRequest("Password is required.");
-                //if (string.IsNullOrEmpty(doctor.Category))
-                //    return BadRequest("Password is required.");
 
-                // Call the data layer to update the user
+         
+                package.update_doctor(doctor); 
 
                 return Ok("User updated successfully.");
             }
             catch (OracleException ex)
             {
-                // Log Oracle-specific errors
                 Console.WriteLine($"Oracle error: {ex.Message}");
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Database error: {ex.Message}");
             }
             catch (Exception ex)
             {
-                // Log general errors
                 Console.WriteLine($"General error: {ex.Message}");
                 return StatusCode(StatusCodes.Status500InternalServerError, "An unexpected error occurred.");
             }

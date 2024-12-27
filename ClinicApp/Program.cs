@@ -48,9 +48,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAllCors", config =>
     {
-        config.AllowAnyOrigin().AllowAnyMethod().AllowAnyMethod().AllowAnyHeader();
+        config.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
     });
 });
+
 
 builder.Services.AddSwaggerGen(option =>
 {
@@ -97,6 +98,7 @@ builder.Services.AddScoped<IPKG_USERS_D, PKG_USERS_D>();
 builder.Services.AddScoped<IPKG_DOCTORS_D, PKG_DOCTORS_D>();
 builder.Services.AddScoped<IPKG_DOCTORS_D, PKG_DOCTORS_D>();
 builder.Services.AddScoped<IPKG_DSH_CATEGORY, PKG_DSH_CATEGORY>();
+builder.Services.AddScoped<IPKG_APPOINTMENTS_D, PKG_APPOINTMENTS_D>();
 //builder.Services.AddScoped<UserRepository>(); // Register UserRepository
 
 builder.Services.AddScoped<IPKG_LOGS, PKG_LOGS>();

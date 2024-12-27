@@ -26,13 +26,14 @@ namespace ClinicApp.Packages
 
             OracleCommand cmd = conn.CreateCommand();
             cmd.Connection = conn;
-            cmd.CommandText = "olerning.PKG_apointment_d.add_appointment";
+            cmd.CommandText = "olerning.PKG_dsh_booking.add_booking";
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.Add("p_user_id", OracleDbType.Varchar2).Value = appointment.UserId;
             cmd.Parameters.Add("p_doctor_id", OracleDbType.Varchar2).Value = appointment.DoctorId;
-            cmd.Parameters.Add("p_problem", OracleDbType.Varchar2).Value = appointment.Problem;
-            cmd.Parameters.Add("p_date_time", OracleDbType.Date).Value = appointment.DateTime;
+            cmd.Parameters.Add("p_booking_date", OracleDbType.Date).Value = appointment.DateTime;
+            cmd.Parameters.Add("p_description", OracleDbType.Varchar2).Value = appointment.Problem;
+            
 
 
 
