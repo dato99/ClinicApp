@@ -20,9 +20,9 @@ namespace ClinicApp.Controllers
             try
             {
                 // Validate required fields
-                if (string.IsNullOrEmpty(appointment.UserId)) return BadRequest("");
-                if (string.IsNullOrEmpty(appointment.DoctorId)) return BadRequest("Last name is required!");
-                if (string.IsNullOrEmpty(appointment.Problem)) return BadRequest("Email is required!");
+                //if (string.IsNullOrEmpty(appointment.UserId)) return BadRequest("not valid userId");
+                //if (string.IsNullOrEmpty(appointment.DoctorId)) return BadRequest("not valid doctorId");
+                //if (string.IsNullOrEmpty(appointment.Problem)) return BadRequest("error!");
                 //if (string.IsNullOrEmpty(appointment.DateTime)) return BadRequest("Personal ID is required!");
             
                

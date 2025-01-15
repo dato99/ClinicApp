@@ -3,8 +3,8 @@
     public class Appointment
     {
         public int Id { get; set; }
-        public string UserId{ get; set; }
-        public string DoctorId { get; set; }
+        public int UserId{ get; set; }
+        public int DoctorId { get; set; }
         public string Problem { get; set; }                                                  
         public DateTime DateTime { get; set; }
 
